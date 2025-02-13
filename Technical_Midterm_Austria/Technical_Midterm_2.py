@@ -1,4 +1,3 @@
-# Program 2: Convert Date Format
 def convert_date(date_str):
     month_str, day_str, year_str = date_str.split('/')
     month = int(month_str)
