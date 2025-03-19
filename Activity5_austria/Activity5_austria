@@ -1,0 +1,43 @@
+def divide(a, b): return None if b == 0 else a / b
+def exponentiation(a, b): return a ** b
+def remainder(a, b): return None if b == 0 else a % b
+def summation(a, b): return None if b <= a else sum(range(a, b + 1))
+
+operations = {
+    'D': ('Divide', divide),
+    'E': ('Exponentiation', exponentiation),
+    'R': ('Remainder', remainder),
+    'F': ('Summation', summation)
+}
+
+while True:
+    print("\n=== Mathematical Operations Menu ===")
+    print("[D] - Divide")
+    print("[E] - Exponentiation")
+    print("[R] - Remainder")
+    print("[F] - Summation")
+    print("[Q] - Quit")
+    
+    choice = input("\nEnter your choice: ").upper()
+    if choice == 'Q': break
+    if choice not in operations: print("Invalid choice"); continue
+    
+    try:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+        if choice == 'F': num1, num2 = int(num1), int(num2)
+        
+        result = operations[choice][1](num1, num2)
+        
+        if result is None:
+            error_msg = "Division by zero" if choice in ['D', 'R'] else "Second number must be greater than first"
+            print(f"Error: {error_msg}")
+        else:
+            if choice == 'F':
+                terms = " + ".join(str(i) for i in range(num1, num2 + 1))
+                print(f"Sum: {terms} = {result}")
+            else:
+                op = {'D': '/', 'E': '^', 'R': '%'}[choice]
+                print(f"{num1} {op} {num2} = {result}")
+    except ValueError:
+        print("Error: Please enter valid numbers")
